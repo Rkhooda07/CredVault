@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Web3 Credential Platform Design System - Fintech x Blockchain x EdTech */
+
+@layer base {
+  :root {
+    /* Core background and text */
+    --background: 240 10% 3.9%;
+    --foreground: 240 5% 96%;
+
+    /* Card system */
+    --card: 240 10% 6%;
+    --card-foreground: 240 5% 96%;
+
+    /* Popover */
+    --popover: 240 10% 6%;
+    --popover-foreground: 240 5% 96%;
+
+    /* Primary - Indigo/Blue for blockchain trust */
+    --primary: 239 84% 67%;
+    --primary-foreground: 240 10% 3.9%;
+    --primary-glow: 239 84% 75%;
+
+    /* Secondary - Professional blue-gray */
+    --secondary: 240 6% 15%;
+    --secondary-foreground: 240 5% 96%;
+
+    /* Muted elements */
+    --muted: 240 6% 10%;
+    --muted-foreground: 240 5% 65%;
+
+    /* Accent - Bright blue for interactions */
+    --accent: 217 91% 60%;
+    --accent-foreground: 240 10% 3.9%;
+
+    /* Success and error states */
+    --success: 142 76% 36%;
+    --success-foreground: 240 5% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 240 5% 96%;
+
+    /* Borders and inputs */
+    --border: 240 6% 15%;
+    --input: 240 6% 15%;
+    --ring: 239 84% 67%;
+
+    /* Gradients for Web3 aesthetic */
+    --gradient-primary: linear-gradient(135deg, hsl(239 84% 67%), hsl(217 91% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(240 6% 15%), hsl(240 10% 6%));
+    --gradient-hero: linear-gradient(135deg, hsl(239 84% 67%), hsl(217 91% 60%), hsl(239 84% 75%));
+    --gradient-card: linear-gradient(145deg, hsl(240 10% 6%), hsl(240 6% 10%));
+
+    /* Shadows with glow effects */
+    --shadow-glow: 0 0 20px hsl(239 84% 67% / 0.3);
+    --shadow-card: 0 4px 20px hsl(240 10% 3.9% / 0.5);
+    --shadow-elevated: 0 8px 40px hsl(240 10% 3.9% / 0.6);
+
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .light {
+    /* Light mode - Professional fintech look */
+    --background: 240 20% 98%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 239 84% 75%;
+
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 10% 3.9%;
+
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 5% 45%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 239 84% 67%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(239 84% 67%), hsl(217 91% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(240 5% 96%), hsl(0 0% 100%));
+    --gradient-hero: linear-gradient(135deg, hsl(239 84% 67%), hsl(217 91% 60%), hsl(239 84% 75%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(240 5% 98%));
+
+    --shadow-glow: 0 0 20px hsl(239 84% 67% / 0.2);
+    --shadow-card: 0 4px 20px hsl(240 10% 3.9% / 0.1);
+    --shadow-elevated: 0 8px 40px hsl(240 10% 3.9% / 0.15);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Web3 credential card styling */
+  .credential-card {
+    @apply bg-gradient-to-br from-card to-muted/50 border border-border/50 rounded-xl p-6;
+    @apply shadow-card hover:shadow-elevated transition-all duration-300;
+    @apply backdrop-blur-sm relative overflow-hidden;
+  }
+
+  .credential-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/5 opacity-0;
+    @apply transition-opacity duration-300;
+  }
+
+  .credential-card:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Hero gradient button */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary via-accent to-primary-glow;
+    @apply text-primary-foreground font-semibold px-8 py-4 rounded-xl;
+    @apply shadow-glow hover:shadow-elevated transition-all duration-300;
+    @apply hover:scale-105 active:scale-95 relative overflow-hidden;
+  }
+
+  /* Verification status badges */
+  .status-verified {
+    @apply bg-success/20 text-success border border-success/30 rounded-full px-3 py-1 text-sm font-medium;
+  }
+
+  .status-pending {
+    @apply bg-accent/20 text-accent border border-accent/30 rounded-full px-3 py-1 text-sm font-medium;
+  }
+
+  .status-revoked {
+    @apply bg-destructive/20 text-destructive border border-destructive/30 rounded-full px-3 py-1 text-sm font-medium;
+  }
+
+  /* Animated background for hero sections */
+  .hero-bg {
+    @apply bg-gradient-to-br from-background via-muted/30 to-background relative;
+  }
+
+  .hero-bg::before {
+    content: '';
+    @apply absolute inset-0 opacity-30;
+    background: radial-gradient(circle at 25% 25%, hsl(239 84% 67% / 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, hsl(217 91% 60% / 0.2) 0%, transparent 50%);
+  }
+
+  /* Smooth transitions for interactive elements */
+  .interactive {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-elevated;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(239 84% 67% / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(239 84% 67% / 0.6); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 4s ease-in-out infinite;
+}
