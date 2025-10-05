@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   // Use relative base so built assets work under any subpath (GitHub Pages)
-  base: "/CredVault/",
+  base: './',
   server: {
     host: "::",
     port: 8080,
