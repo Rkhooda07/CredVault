@@ -2,7 +2,7 @@
   "name": "vite_react_shadcn_ts",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://rkhooda07.github.io/CredVault",
+  "homepage": "https://github.com/Rkhooda07/CredVault",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,7 +15,7 @@
     "contract:test": "cd contracts && forge test",
     "contract:deploy": "cd contracts && ./deploy.sh",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r https://github.com/Rkhooda07/CredVault.git"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
