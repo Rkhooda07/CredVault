@@ -8,7 +8,7 @@ import Landing from "./pages/Landing";
 import StudentDashboard from "./pages/StudentDashboard";
 import InstitutionDashboard from "./pages/InstitutionDashboard";
 import VerifierPage from "./pages/VerifierPage";
-// import NotFound from "./pages/NotFound";
+import NotFound from "./pages/NotFound";
 import StudentLogin from "./pages/StudentLogin";
 import InstitutionLogin from "./pages/InstitutionLogin";
 
@@ -39,7 +39,7 @@ const App = () => (
               <Route path="/verify" element={<VerifierPage />} />
 
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              {/* <Route path="*" element={<NotFound />} /> */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
         </div>
