@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -31,6 +31,14 @@ export default function StudentDashboard() {
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
+
+  useEffect(() => {
+    const address = localStorage.getItem("walletAddress");
+    if (address) {
+      setWalletAddress(address);
+    }
+  }, []);
 
   // Mock data
   const credentials: Credential[] = [
@@ -158,7 +166,9 @@ export default function StudentDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Wallet</p>
-                <p className="text-sm font-mono">0x1234...abcd</p>
+                <p className="text-sm font-mono">
+                  {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : "Not Connected"}
+                </p>
               </div>
               <div className="w-12 h-12 bg-primary-glow/20 rounded-full flex items-center justify-center">
                 <Wallet className="w-6 h-6 text-primary-glow" />

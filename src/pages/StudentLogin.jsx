@@ -1,15 +1,45 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ethers } from 'ethers';
 import './Login.css';
 import logo from '@/assets/logo.png';
-import { Link2 } from 'lucide-react'; // Chain link icon - perfect for blockchain
+import { Link2 } from 'lucide-react';
 
 const StudentLogin = () => {
   const navigate = useNavigate();
   const cardRef = useRef(null);
+  const [walletAddress, setWalletAddress] = useState("");
 
-  const handleConnect = () => {
-    navigate('/student-dashboard');
+  useEffect(() => {
+    // Load saved wallet address on component mount
+    const savedAddress = localStorage.getItem("walletAddress");
+    if (savedAddress) {
+      setWalletAddress(savedAddress);
+    }
+  }, []);
+
+  const handleConnect = async () => {
+    try {
+      if (!window.ethereum) {
+        alert("MetaMask is not installed. Please install it to continue.");
+        return;
+      }
+
+      // Use ethers.js provider (optional, for further usage)
+      const provider = new ethers.BrowserProvider(window.ethereum);
+
+      // Trigger MetaMask popup for account selection
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const address = accounts[0];
+
+      setWalletAddress(address);
+      localStorage.setItem("walletAddress", address);
+
+      navigate("/student-dashboard");
+    } catch (error) {
+      console.error("MetaMask connection error:", error);
+      alert("Failed to connect MetaMask. Please try again.");
+    }
   };
 
   const handleMouseMove = (e) => {
@@ -42,10 +72,8 @@ const StudentLogin = () => {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        {/* Title */}
         <h1 className="portal-title">Student Portal</h1>
         
-        {/* Logo Connection Display */}
         <div className="logo-connection">
           <div className="logo-wrapper">
             <img src={logo} alt="CredVault Logo" className="credvault-logo" />
@@ -66,14 +94,8 @@ const StudentLogin = () => {
           </div>
         </div>
         
-        {/* Description */}
-        {/* <p className="portal-description">
-          Click here to connect to your MetaMask wallet
-        </p> */}
-        
-        {/* Connect Button */}
         <button onClick={handleConnect} className="connect-btn">
-          Connect to your MetaMask wallet
+          {walletAddress ? "Connected: " + walletAddress.slice(0,6) + "..." + walletAddress.slice(-4) : "Connect to your MetaMask wallet"}
         </button>
       </div>
     </div>

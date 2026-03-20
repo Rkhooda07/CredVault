@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Shield, User, Building, Search, Wallet, ChevronDown, Copy } from "lucide-react";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
@@ -6,6 +6,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navigation() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isWalletOpen, setIsWalletOpen] = useState(false);
 
@@ -19,8 +20,8 @@ export function Navigation() {
     { path: "/verify", label: "Verify", icon: Search },
   ];
 
-  // Example address and metas mask logo URL for dropdown display ONLY
-  const walletAddress = "0x20fE6...4b522";
+  // Example address and MetaMask logo URL for dropdown display ONLY
+  const walletAddress = localStorage.getItem("walletAddress") || "";
   const fullWalletAddress = "0x20fE6789AbCdEf1234567890aBcDeF4b522";
   const metaMaskLogo = "https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg";
   const accountName = "Account 1"; // You can fetch via your wallet integration
@@ -28,6 +29,13 @@ export function Navigation() {
   const copyAddress = () => {
     navigator.clipboard.writeText(fullWalletAddress);
     // Optionally add a toast notification
+  };
+
+  const handleLogout = () => {
+    // Clear all wallet info
+    localStorage.removeItem("walletAddress");
+    // Redirect to login page
+    navigate("/student-portal");
   };
 
   return (
@@ -100,7 +108,15 @@ export function Navigation() {
                 )}
               </div>
             )}
-
+            {isDashboard && (
+              <button
+                onClick={handleLogout}
+                className="flex items-center justify-center px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500 font-medium hover:bg-red-500/20 transition"
+                title="Logout"
+              >
+                Logout
+              </button>
+            )}
             {/* Theme Toggle, always last on the right */}
             <ThemeToggle />
           </div>
